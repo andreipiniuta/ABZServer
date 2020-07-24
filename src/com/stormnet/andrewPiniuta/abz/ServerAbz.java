@@ -60,7 +60,7 @@ public class ServerAbz {
 //установка кода ОК из Enum-a
             response.setResponseCode(ResponseCode.OkCode);
 //отправляем назад json
-            jsonWriter.object();//создал json объект
+            jsonWriter.object();//создал json объект тут
             buildHeadersSection(jsonWriter, response);//метод по создание json объект-код ошибки
             buildResponseDataSection(jsonWriter, response);//метод по создание json объект-список бизнес объектов
             jsonWriter.endObject();//закрыл json объект
