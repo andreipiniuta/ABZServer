@@ -6,13 +6,14 @@ import com.stormnet.andrewPiniuta.abz.service.StaffService;
 import com.stormnet.andrewPiniuta.abz.web.Command;
 import com.stormnet.andrewPiniuta.abz.web.Request;
 import com.stormnet.andrewPiniuta.abz.web.Response;
-import org.json.JSONWriter;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GetAllStaffCommand implements Command {
     @Override
@@ -22,21 +23,17 @@ public class GetAllStaffCommand implements Command {
 
         List<Staff> allStaff = ss.getAllStaff();
 
-        JSONWriter jsonWriter = response.getJsonWriter();
-
-        jsonWriter.array();
-//из списка с объектами берем по одному и пихаем в json
+        //запись объекта через карту
         for (Staff staff : allStaff) {
+            Map<String, Object> staffMap = new HashMap<>();
+            staffMap.put("ID", staff.getID());
+            staffMap.put("name", staff.getName());
+            staffMap.put("surname", staff.getSurname());
+            staffMap.put("position", staff.getPosition());
+            staffMap.put("salary", staff.getSalary());
 
-            jsonWriter.object();
-            jsonWriter.key("ID").value(staff.getID());
-            jsonWriter.key("name").value(staff.getName());
-            jsonWriter.key("surname").value(staff.getSurname());
-            jsonWriter.key("position").value(staff.getPosition());
-            jsonWriter.key("salary").value(staff.getSalary());
-            jsonWriter.endObject();
+            //каждую карту кладём в response
+            response.addResponseData(staffMap);
         }
-
-        jsonWriter.endArray();
     }
 }

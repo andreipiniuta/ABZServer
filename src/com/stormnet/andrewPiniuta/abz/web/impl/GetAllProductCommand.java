@@ -6,13 +6,14 @@ import com.stormnet.andrewPiniuta.abz.service.ServiceFactory;
 import com.stormnet.andrewPiniuta.abz.web.Command;
 import com.stormnet.andrewPiniuta.abz.web.Request;
 import com.stormnet.andrewPiniuta.abz.web.Response;
-import org.json.JSONWriter;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GetAllProductCommand implements Command {
     @Override
@@ -21,23 +22,16 @@ public class GetAllProductCommand implements Command {
         ServiceFactory sf = ServiceFactory.getServiceFactory();
         ProductService ps = sf.getProductService();
 
-        List<Product> allProduct = ps.getAllProduct();;
-
-        JSONWriter jsonWriter = response.getJsonWriter();
-
-        jsonWriter.array();
-//из списка с объектами берем по одному и пихаем в json
+        List<Product> allProduct = ps.getAllProduct();
+        //запись объекта через карту
         for (Product product : allProduct) {
-
-            jsonWriter.object();
-            jsonWriter.key("ID").value(product.getID());
-            jsonWriter.key("productName").value(product.getProductName());
-            jsonWriter.key("productAmount").value(product.getProductAmount());
-            jsonWriter.key("constructionAddress").value(product.getConstructionAddress());
-            jsonWriter.endObject();
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put("ID", product.getID());
+            productMap.put("productName", product.getProductName());
+            productMap.put("productAmount", product.getProductAmount());
+            productMap.put("constructionAddress", product.getConstructionAddress());
+            //каждую карту кладём в response
+            response.addResponseData(productMap);
         }
-
-        jsonWriter.endArray();
-
     }
 }

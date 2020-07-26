@@ -11,9 +11,12 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 //в классах с реализацией метода Interface Command используем объекты Service
-public class GetAllMatterialCommand implements Command {
+public class GetAllMaterialCommand implements Command {
     @Override
     public void execute(Request request, Response response) throws IOException, SAXException, ParserConfigurationException {
 //создали Service объект и вызвали метод getAllMaterial
@@ -21,24 +24,18 @@ public class GetAllMatterialCommand implements Command {
         MaterialService ms = sf.getMaterialService();
 
         List<Material> allMaterial = ms.getAllMaterial();
-
-        JSONWriter jsonWriter = response.getJsonWriter();
-
-        jsonWriter.array();
-//из списка с объектами берем по одному и пихаем в json
+        //запись объекта через карту
         for (Material material : allMaterial) {
-
-            jsonWriter.object();
-            jsonWriter.key("ID").value(material.getID());
-            jsonWriter.key("materialName").value(material.getMaterialName());
-            jsonWriter.key("providerName").value(material.getProviderName());
-            jsonWriter.key("amount").value(material.getAmount());
-            jsonWriter.key("costPerOne").value(material.getCostPerOne());
-            jsonWriter.key("totalCost").value(material.getTotalCost());
-            jsonWriter.endObject();
+            Map<String, Object> materialMap = new HashMap<>();
+            materialMap.put("ID", material.getID());
+            materialMap.put("materialName", material.getMaterialName());
+            materialMap.put("providerName", material.getProviderName());
+            materialMap.put("amount", material.getAmount());
+            materialMap.put("costPerOne", material.getCostPerOne());
+            materialMap.put("totalCost", material.getTotalCost());
+            //каждую карту кладём в response
+            response.addResponseData(materialMap);
         }
-
-        jsonWriter.endArray();
 
     }
 }

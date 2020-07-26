@@ -27,28 +27,28 @@ public class GetMaterialByIDCommand implements Command {
         Material material = ms.getMaterialbyID(ID);
 
         //запись объекта через карту
-
-//        Map<String, Object> MaterialMap = new HashMap<>();
+        Map<String, Object> materialMap = new HashMap<>();
 //в карту кладем ключи и значения бизнес объекта
-//        MaterialMap.put("ID", m.getID());
-//        MaterialMap.put("materialName", m.getMaterialName());
-//        MaterialMap.put("providerName", m.getProviderName());
-//        MaterialMap.put("amount", m.getAmount());
-//        MaterialMap.put("costPerOne", m.getCostPerOne());
-//        MaterialMap.put("totalCost", m.getTotalCost());
-//        response.addResponseData(MaterialMap);
+        materialMap.put("ID", material.getID());
+        materialMap.put("materialName", material.getMaterialName());
+        materialMap.put("providerName", material.getProviderName());
+        materialMap.put("amount", material.getAmount());
+        materialMap.put("costPerOne", material.getCostPerOne());
+        materialMap.put("totalCost", material.getTotalCost());
+        //карту кладем в response
+        response.addResponseData(materialMap);
 
         //запись объекта через JSON
 
-        JSONWriter jsonWriter = response.getJsonWriter();
-        jsonWriter.object();
-        jsonWriter.key("ID").value(material.getID());
-        jsonWriter.key("materialName").value(material.getMaterialName());
-        jsonWriter.key("providerName").value(material.getProviderName());
-        jsonWriter.key("amount").value(material.getAmount());
-        jsonWriter.key("costPerOne").value(material.getCostPerOne());
-        jsonWriter.key("totalCost").value(material.getTotalCost());
-        jsonWriter.endObject();
+//        JSONWriter jsonWriter = response.getJsonWriter();
+//        jsonWriter.object();
+//        jsonWriter.key("ID").value(material.getID());
+//        jsonWriter.key("materialName").value(material.getMaterialName());
+//        jsonWriter.key("providerName").value(material.getProviderName());
+//        jsonWriter.key("amount").value(material.getAmount());
+//        jsonWriter.key("costPerOne").value(material.getCostPerOne());
+//        jsonWriter.key("totalCost").value(material.getTotalCost());
+//        jsonWriter.endObject();
 
     }
 }

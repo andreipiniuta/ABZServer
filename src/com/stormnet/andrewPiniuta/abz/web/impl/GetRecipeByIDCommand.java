@@ -6,12 +6,13 @@ import com.stormnet.andrewPiniuta.abz.service.ServiceFactory;
 import com.stormnet.andrewPiniuta.abz.web.Command;
 import com.stormnet.andrewPiniuta.abz.web.Request;
 import com.stormnet.andrewPiniuta.abz.web.Response;
-import org.json.JSONWriter;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GetRecipeByIDCommand implements Command {
     @Override
@@ -21,13 +22,15 @@ public class GetRecipeByIDCommand implements Command {
         RecipeService rs = sf.getRecipeService();
         Recipe recipe = rs.getRecipeByID(ID);
 
-        JSONWriter jsonWriter = response.getJsonWriter();
-        jsonWriter.object();
-        jsonWriter.key("ID").value(recipe.getID());
-        jsonWriter.key("productName").value(recipe.getProductName());
-        jsonWriter.key("sandPercent").value(recipe.getSandPercent());
-        jsonWriter.key("gravelPercent").value(recipe.getGravelPercent());
-        jsonWriter.key("bitumPercent").value(recipe.getBitumPercent());
-        jsonWriter.endObject();
+        //запись объекта через карту
+        Map<String, Object> recipeMap = new HashMap<>();
+//в карту кладем ключи и значения бизнес объекта
+        recipeMap.put("ID", recipe.getID());
+        recipeMap.put("productName", recipe.getProductName());
+        recipeMap.put("sandPercent", recipe.getSandPercent());
+        recipeMap.put("gravelPercent", recipe.getGravelPercent());
+        recipeMap.put("bitumPercent", recipe.getBitumPercent());
+        //карту кладем в response
+        response.addResponseData(recipeMap);
     }
 }

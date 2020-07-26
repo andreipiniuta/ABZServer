@@ -19,8 +19,8 @@ public class CommandFactory {
 
     private CommandFactory() {//приватный конструктор, кладем в карту команды: название команды --сама команда
         commands.put("save-material", new SaveMaterialCommand());
-        commands.put("get-all-material", new GetAllMatterialCommand());
-        commands.put("get-material-by-id", new GetAllMatterialCommand());
+        commands.put("get-all-material", new GetAllMaterialCommand());
+        commands.put("get-material-by-id", new GetMaterialByIDCommand());
         commands.put("delete-material", new DeleteMaterialCommand());
         commands.put("save-recipe", new SaveRecipeCommand());
         commands.put("save-staff", new SaveStaffCommand());

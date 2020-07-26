@@ -19,11 +19,9 @@ public class Request implements com.stormnet.andrewPiniuta.abz.web.Request {
         JSONObject clientHeaders = clientRequest.getJSONObject("headers");
         this.commandName = clientHeaders.getString("command-name");
 
-        if (commandName.equals("get-all-material") || commandName.equals("get-material-by-id") ||
-            commandName.equals("get-all-recipe") || commandName.equals("get-recipe-by-id") ||
-            commandName.equals("get-all-product") || commandName.equals("get-product-by-id")||
-            commandName.equals("get-all-staff") || commandName.equals("get-staff-by-id") ||
-            commandName.equals("get-all-truck") || commandName.equals("get-truck-by-id")){
+        if (commandName.equals("get-all-material") || commandName.equals("get-all-recipe") ||
+            commandName.equals("get-all-product") || commandName.equals("get-all-staff") ||
+            commandName.equals("get-all-truck")) {
             return;
         }
         //читаем секцию с бизнес объектом

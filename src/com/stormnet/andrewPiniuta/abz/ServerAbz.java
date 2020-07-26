@@ -83,7 +83,7 @@ public class ServerAbz {
         jsonWriter.key("response-data");
         jsonWriter.array();//создали массив json объектов
 
-        //в список карт ложим список из response
+        //в список карт ложим список карт из response
         List<Map<String, Object>> responseDataValue = response.getResponseDataValue();
 
         for (Map<String, Object> dataValue : responseDataValue) {//в цикле из списка карт достаем по одной карте
@@ -92,7 +92,7 @@ public class ServerAbz {
 
             Set<String> keySet = dataValue.keySet();//у карты достали ключи
             for (String key: keySet) {
-                jsonWriter.key(key).value(dataValue.get(key));// по ключам достали их значения
+                jsonWriter.key(key).value(dataValue.get(key));// по ключам достали их значения и положили в Json
             }
 
             jsonWriter.endObject();//закрыли json объект

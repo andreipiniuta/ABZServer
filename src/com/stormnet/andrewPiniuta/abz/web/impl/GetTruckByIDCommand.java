@@ -6,12 +6,13 @@ import com.stormnet.andrewPiniuta.abz.service.TruckService;
 import com.stormnet.andrewPiniuta.abz.web.Command;
 import com.stormnet.andrewPiniuta.abz.web.Request;
 import com.stormnet.andrewPiniuta.abz.web.Response;
-import org.json.JSONWriter;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GetTruckByIDCommand implements Command {
     @Override
@@ -21,12 +22,11 @@ public class GetTruckByIDCommand implements Command {
         TruckService ts = sf.getTruckService();
         Truck truck = ts.getTruckByID(ID);
 
-        JSONWriter jsonWriter = response.getJsonWriter();
-        jsonWriter.object();
-        jsonWriter.key("ID").value(truck.getID());
-        jsonWriter.key("truckType").value(truck.getTruckType());
-        jsonWriter.key("truckNumber").value(truck.getTruckNumber());
-        jsonWriter.key("payload").value(truck.getPayload());
-        jsonWriter.endObject();
+        Map<String, Object> truckMap = new HashMap<>();
+        truckMap.put("ID", truck.getID());
+        truckMap.put("truckType", truck.getTruckType());
+        truckMap.put("truckNumber", truck.getTruckNumber());
+        truckMap.put("payload", truck.getPayload());
+        response.addResponseData(truckMap);
     }
 }
