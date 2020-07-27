@@ -13,11 +13,11 @@ public class Response implements com.stormnet.andrewPiniuta.abz.web.Response {
 
     private List<Map<String, Object>> responseData = new ArrayList<>();//список карт бизнес объектов
 
-    private JSONWriter writer;
+//    private JSONWriter writer;
 
-    public Response(JSONWriter writer) {//конструктор
-        this.writer = writer;
-    }
+//    public Response(JSONWriter writer) {//конструктор
+//        this.writer = writer;
+//    }
 
     @Override
     public int getStatusCode() {//возвр кодп
@@ -44,8 +44,8 @@ public class Response implements com.stormnet.andrewPiniuta.abz.web.Response {
         return responseData;
     }
 
-    @Override
-    public JSONWriter getJsonWriter() {//геттер writer
-        return writer;
-    }
+//    @Override
+//    public JSONWriter getJsonWriter() {//геттер writer
+//        return writer;
+//    }
 }

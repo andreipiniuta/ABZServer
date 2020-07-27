@@ -21,7 +21,7 @@ public class SaveMaterialCommand implements Command {
 
 //достаем из объекта request данные бизнесс объекта
          Integer ID;
-        if (request.getParameter("ID").equals(null)){
+        if (request.getParameter("ID") == null){
             ID = null;
         } else {
             ID = (int) request.getParameter("ID");

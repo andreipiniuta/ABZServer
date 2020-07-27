@@ -18,7 +18,7 @@ public class SaveProductCommand implements Command {
     @Override
     public void execute(Request request, Response response) throws IOException, TransformerException, SAXException, ParserConfigurationException {
         Integer ID;
-        if (request.getParameter("ID").equals(null)){
+        if (request.getParameter("ID") == null){
             ID = null;
         } else {
             ID = (int) request.getParameter("ID");

@@ -18,5 +18,5 @@ public interface Response {
 
     List<Map<String, Object>> getResponseDataValue();
 
-    JSONWriter getJsonWriter();
+//    JSONWriter getJsonWriter();
 }

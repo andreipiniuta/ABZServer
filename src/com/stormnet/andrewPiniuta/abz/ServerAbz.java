@@ -8,13 +8,15 @@ import com.stormnet.andrewPiniuta.abz.web.requestResponse.ResponseCode;
 import org.json.JSONTokener;
 import org.json.JSONWriter;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.SocketHandler;
 
 public class ServerAbz {
     public static void main(String[] args) throws IOException {
@@ -34,7 +36,7 @@ public class ServerAbz {
 
 
             Request request = new Request(tokener);//создали объект request(в нем имя команды и если есть бизнес объект в Map)
-            Response response = new Response(jsonWriter);//создали объект response(в нем имя кода ошибки и если есть бизнесдля отправк)
+            Response response = new Response();//создали объект response(в нем имя кода ошибки и если есть бизнесдля отправк)
 //получаем фабрику команд, создаем объект каманда
             CommandFactory commandFactory = CommandFactory.get();
             Command command = commandFactory.getCommand(request.getCommandName());//создаем команду с установкой какая команда пришла
